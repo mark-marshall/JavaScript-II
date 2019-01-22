@@ -86,6 +86,16 @@ function removeDuplicates(array, cb) {
   // Do not mutate the original array.
 }
 
-function removeDuplicates(array,cb) {
-  cb()
-}
+let duplicateTest = ["Pencil", "Pencil", "Pencil", "Notebook", "yo-yo", "yo-yo", "Gum", "Book"];
+
+function removeDuplicates(array, cb) {
+  let deDuper = array.filter(function(item,index){
+    return array.indexOf(item) >= index
+  });
+
+  return cb(deDuper);
+};
+
+removeDuplicates(duplicateTest, function(dupes){
+  console.log(dupes);
+})
