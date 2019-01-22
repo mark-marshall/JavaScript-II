@@ -30,26 +30,41 @@ son();
 // newCounter(); // 1
 // newCounter(); // 2
 
-function outer() {
-  let count = 0; 
-
-  return function inner() {
-    console.log(count++);
+const counter = () => {
+  let count = 0;
+  
+    return function () {
+        return count++;
+      }
   };
-}
-
-const counter = outer(); // Initialises the variable count by running the outer function once, sets the grabbale count variable at 0 for the inner. This also pulls the nested function out into global scope so we can now access it.
-counter(); // reaches into the nested function and iterates..
-counter(); 
-counter(); 
-counter(); 
-counter(); 
-
+  
+  const newCounter = counter();
+  newCounter();
+  newCounter();
+  newCounter();
+  
 /* STRETCH PROBLEM, Do not attempt until you have completed all previous tasks for today's project files */
 
 // ==== Challenge 3: Create a counter function with an object that can increment and decrement ====
-const counterFactory = () => {
+// const counterFactory = () => {
   // Return an object that has two methods called `increment` and `decrement`.
   // `increment` should increment a counter variable in closure scope and return it.
   // `decrement` should decrement the counter variable and return it.
+//};
+
+const counterFactory = () => {
+  let countr =0;
+
+  return {
+    increment: function (){return countr++;},
+    decrement: function (){return countr--;},
+    checker: function (){return countr;},
+  }
 };
+
+let counterTime = counterFactory();
+counterTime.increment();
+counterTime.decrement();
+counterTime.decrement();
+counterTime.decrement();
+console.log(counterTime.checker());
